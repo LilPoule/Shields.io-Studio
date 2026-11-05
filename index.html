@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shields.io Studio | Générateur de Badges GitHub Custom</title>
+  <meta name="description" content="Studio interactif de creation et de configuration de badges Shields.io en SVG, Markdown et HTML pour vos depots GitHub et documentations techniques." />
+  <link rel="canonical" href="https://shields-studio.local/" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Cpath d='M12 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016A11.955 11.955 0 0112 2.944z'/%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shields.io Studio | Générateur de Badges GitHub" />
+  <meta property="og:description" content="Configurez et exportez vos badges vectoriels Shields.io en temps reel avec logos Simple Icons, couleurs sur mesure et liens cliquables." />
+  <meta property="og:image" content="https://img.shields.io/badge/Shields.io-Studio-6366f1?logo=github" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <section class="header-inner" aria-label="En-tête de l'application">
+      <section class="brand-group" aria-label="Identité du projet">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </span>
+        <header>
+          <h1 class="brand-title">
+            Shields.io Studio
+            <span class="version-pill">v1.0</span>
+          </h1>
+          <p class="brand-subtitle">Générateur de badges GitHub personnalisés en temps réel</p>
+        </header>
+      </section>
+
+      <nav class="preset-nav" aria-label="Modèles rapides de badges">
+        <span class="preset-label">Presets :</span>
+        <button type="button" data-preset="build" class="btn-preset">Build Passing</button>
+        <button type="button" data-preset="version" class="btn-preset">Release v2.4</button>
+        <button type="button" data-preset="typescript" class="btn-preset">TypeScript</button>
+        <button type="button" id="resetBtn" class="btn-reset" title="Réinitialiser les paramètres">Reset</button>
+      </nav>
+    </section>
+  </header>
+
+  <main class="workspace">
+    <section class="controls-column" aria-label="Paramètres de personnalisation du badge">
+
+      <nav class="category-tabs" aria-label="Filtrer par catégorie de configuration">
+        <button type="button" data-tab="all" class="tab-btn is-active" aria-pressed="true">Toutes les catégories</button>
+        <button type="button" data-tab="basic" class="tab-btn" aria-pressed="false">1. Basique</button>
+        <button type="button" data-tab="advanced" class="tab-btn" aria-pressed="false">2. Avancé &amp; Logo</button>
+        <button type="button" data-tab="extra" class="tab-btn" aria-pressed="false">3. Dimensions &amp; Liens</button>
+      </nav>
+
+      <article id="section-basic" class="accordion-card">
+        <header>
+          <button type="button" class="accordion-header" data-target="body-basic" aria-expanded="true" aria-controls="body-basic">
+            <span class="header-meta">
+              <span class="step-badge">1</span>
+              <span>
+                <h2 class="card-heading">Catégorie 1 : Configuration Basique</h2>
+                <p class="card-desc">Label, message, couleur principale et style du badge</p>
+              </span>
+            </span>
+            <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </header>
+
+        <section id="body-basic" class="accordion-body">
+          <fieldset class="field-grid">
+            <legend class="sr-only">Textes du badge</legend>
+            <p class="field-group">
+              <label for="labelInput" class="field-title">Label (texte gauche)</label>
+              <input id="labelInput" type="text" value="build" placeholder="ex: build, version, license..." class="text-input" />
+            </p>
+
+            <p class="field-group">
+              <label for="messageInput" class="field-title">Message (texte droite) *</label>
+              <input id="messageInput" type="text" value="passing" placeholder="ex: passing, v1.0.0, MIT..." class="text-input" />
+            </p>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend class="field-title">Style du badge</legend>
+            <nav class="style-pills" id="stylePills" aria-label="Choix du style visuel">
+              <button type="button" data-style="flat" class="style-pill is-selected">flat</button>
+              <button type="button" data-style="plastic" class="style-pill">plastic</button>
+              <button type="button" data-style="flat-square" class="style-pill">flat-square</button>
+              <button type="button" data-style="for-the-badge" class="style-pill">for-the-badge</button>
+              <button type="button" data-style="social" class="style-pill">social</button>
+            </nav>
+            <label for="styleSelect" class="sr-only">Sélecteur de style</label>
+            <select id="styleSelect" class="sr-only">
+              <option value="flat" selected>flat</option>
+              <option value="plastic">plastic</option>
+              <option value="flat-square">flat-square</option>
+              <option value="for-the-badge">for-the-badge</option>
+              <option value="social">social</option>
+            </select>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend class="field-title">Couleur de fond du message (Hexadécimal)</legend>
+            <section class="color-row" aria-label="Choix de couleur principale">
+              <label class="color-box" for="colorHex">
+                <input id="colorPicker" type="color" value="#10b981" aria-label="Sélecteur de couleur du message" />
+                <input id="colorHex" type="text" value="#10b981" maxlength="7" class="hex-input" aria-label="Code hexadécimal du message" />
+              </label>
+
+              <nav class="swatch-list" aria-label="Nuancier rapide">
+                <button type="button" data-color="#10b981" class="color-swatch swatch-emerald" title="Emerald (#10b981)">Emerald</button>
+                <button type="button" data-color="#3b82f6" class="color-swatch swatch-blue" title="Blue (#3b82f6)">Blue</button>
+                <button type="button" data-color="#6366f1" class="color-swatch swatch-indigo" title="Indigo (#6366f1)">Indigo</button>
+                <button type="button" data-color="#f59e0b" class="color-swatch swatch-amber" title="Amber (#f59e0b)">Amber</button>
+                <button type="button" data-color="#ef4444" class="color-swatch swatch-red" title="Red (#ef4444)">Red</button>
+                <button type="button" data-color="#ec4899" class="color-swatch swatch-pink" title="Pink (#ec4899)">Pink</button>
+                <button type="button" data-color="#8b5cf6" class="color-swatch swatch-violet" title="Violet (#8b5cf6)">Violet</button>
+              </nav>
+            </section>
+          </fieldset>
+
+          <fieldset class="field-group divider-top">
+            <header class="field-header">
+              <label for="targetUrlInput" class="field-title">
+                <svg width="14" height="14" fill="none" stroke="#818cf8" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                Lien cliquable du badge (URL de redirection)
+              </label>
+              <span class="hint-text">Rend le badge cliquable (Markdown, HTML &amp; Aperçu)</span>
+            </header>
+            <p class="input-with-action">
+              <input id="targetUrlInput" type="url" value="https://github.com" placeholder="https://github.com/votre-user/votre-repo" class="text-input" />
+              <button type="button" id="clearLinkBtn" class="btn-inline-clear" title="Effacer le lien">Effacer</button>
+            </p>
+            <nav class="chip-bar" aria-label="Exemples de liens cibles">
+              <span class="hint-text">Exemples :</span>
+              <button type="button" data-link="https://github.com/user/repo" class="chip-btn link-chip">GitHub Repo</button>
+              <button type="button" data-link="https://github.com/user/repo/releases" class="chip-btn link-chip">Releases</button>
+              <button type="button" data-link="https://github.com/user/repo/actions" class="chip-btn link-chip">CI Actions</button>
+              <button type="button" data-link="https://www.npmjs.com/package/mon-package" class="chip-btn link-chip">NPM Package</button>
+            </nav>
+          </fieldset>
+        </section>
+      </article>
+
+      <article id="section-advanced" class="accordion-card">
+        <header>
+          <button type="button" class="accordion-header" data-target="body-advanced" aria-expanded="true" aria-controls="body-advanced">
+            <span class="header-meta">
+              <span class="step-badge cyan">2</span>
+              <span>
+                <h2 class="card-heading">Catégorie 2 : Options Avancées &amp; Logo</h2>
+                <p class="card-desc">Couleur du label, icône Simple Icons et couleur du logo</p>
+              </span>
+            </span>
+            <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </header>
+
+        <section id="body-advanced" class="accordion-body">
+          <fieldset class="field-group">
+            <header class="field-header">
+              <h3 class="field-title">Couleur du label (fond gauche)</h3>
+              <label class="toggle-label" for="useCustomLabelColor">
+                <input id="useCustomLabelColor" type="checkbox" />
+                <span>Activer couleur personnalisée</span>
+              </label>
+            </header>
+            <p id="labelColorGroup" class="color-row is-disabled">
+              <label class="color-box" for="labelColorHex">
+                <input id="labelColorPicker" type="color" value="#555555" aria-label="Sélecteur couleur du label" />
+                <input id="labelColorHex" type="text" value="#555555" maxlength="7" class="hex-input" aria-label="Hex couleur du label" />
+              </label>
+              <span class="hint-text">Par défaut : gris foncé (#555555)</span>
+            </p>
+          </fieldset>
+
+          <fieldset class="field-grid">
+            <legend class="sr-only">Configuration de l'icône Simple Icons</legend>
+            <section class="field-group" aria-label="Sélection du slug Simple Icons">
+              <header class="field-header">
+                <label for="logoInput" class="field-title">Logo (slug Simple Icons)</label>
+                <a href="https://simpleicons.org/" target="_blank" rel="noopener noreferrer" class="external-link">Voir la liste</a>
+              </header>
+              <input id="logoInput" type="text" value="github" placeholder="ex: github, react, docker, rust..." class="text-input" />
+              <nav class="chip-bar" aria-label="Logos populaires">
+                <button type="button" data-logo="github" class="chip-btn logo-chip">github</button>
+                <button type="button" data-logo="react" class="chip-btn logo-chip">react</button>
+                <button type="button" data-logo="typescript" class="chip-btn logo-chip">typescript</button>
+                <button type="button" data-logo="docker" class="chip-btn logo-chip">docker</button>
+                <button type="button" data-logo="nodedotjs" class="chip-btn logo-chip">nodedotjs</button>
+                <button type="button" data-logo="" class="chip-btn logo-chip danger">aucun</button>
+              </nav>
+            </section>
+
+            <section class="field-group" aria-label="Teinte du logo">
+              <header class="field-header">
+                <h3 class="field-title">Couleur du logo</h3>
+                <label class="toggle-label" for="useCustomLogoColor">
+                  <input id="useCustomLogoColor" type="checkbox" checked />
+                  <span>Personnaliser</span>
+                </label>
+              </header>
+              <label id="logoColorGroup" class="color-box" for="logoColorHex">
+                <input id="logoColorPicker" type="color" value="#ffffff" aria-label="Sélecteur couleur du logo" />
+                <input id="logoColorHex" type="text" value="#ffffff" maxlength="7" class="hex-input" aria-label="Hex couleur du logo" />
+              </label>
+              <p class="hint-text">Astuce : <code>#FFFFFF</code> assure un contraste optimal sur fond sombre.</p>
+            </section>
+          </fieldset>
+        </section>
+      </article>
+
+      <article id="section-extra" class="accordion-card">
+        <header>
+          <button type="button" class="accordion-header" data-target="body-extra" aria-expanded="true" aria-controls="body-extra">
+            <span class="header-meta">
+              <span class="step-badge purple">3</span>
+              <span>
+                <h2 class="card-heading">Catégorie 3 : Dimensions &amp; Options du Lien Cliquable</h2>
+                <p class="card-desc">Largeur du logo (logoSize), lien SVG natif (?link=) et cible HTML</p>
+              </span>
+            </span>
+            <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </header>
+
+        <section id="body-extra" class="accordion-body">
+          <fieldset class="field-grid">
+            <legend class="sr-only">Dimensions et comportement du lien</legend>
+            <p class="field-group">
+              <label for="logoSizeSelect" class="field-title">Taille du logo (<code>logoSize</code>)</label>
+              <select id="logoSizeSelect" class="select-input">
+                <option value="">Standard (par défaut)</option>
+                <option value="auto">Auto (adaptatif)</option>
+              </select>
+            </p>
+
+            <p class="checkbox-stack">
+              <label class="toggle-label" for="embedSvgLink">
+                <input id="embedSvgLink" type="checkbox" />
+                <span>Intégrer le lien dans le SVG (<code>?link=...</code>)</span>
+              </label>
+              <label class="toggle-label" for="htmlNewTab">
+                <input id="htmlNewTab" type="checkbox" checked />
+                <span>Ouvrir dans un nouvel onglet (<code>target="_blank"</code>)</span>
+              </label>
+            </p>
+          </fieldset>
+        </section>
+      </article>
+
+    </section>
+
+    <aside class="preview-aside" aria-label="Aperçu en direct et exportation">
+      <article class="preview-card">
+        <header class="preview-header">
+          <header>
+            <h2 class="card-heading">
+              <span class="status-dot" aria-hidden="true">•</span>
+              Aperçu en direct
+            </h2>
+            <p class="card-desc">Rendu SVG cliquable en temps réel</p>
+          </header>
+
+          <nav class="canvas-toolbar" aria-label="Outils d'affichage de l'aperçu">
+            <button type="button" id="toggleBgBtn" class="toolbar-btn" title="Basculer le fond d'aperçu Clair/Sombre">Fond clair</button>
+            <button type="button" id="toggleZoomBtn" class="toolbar-btn" title="Agrandir le badge (x1.5)">Zoom x1.5</button>
+          </nav>
+        </header>
+
+        <figure id="previewCanvas" class="preview-stage bg-checkerboard-dark">
+          <a id="badgePreviewLink" href="https://github.com" target="_blank" rel="noopener noreferrer" title="Cliquez pour tester le lien de redirection du badge" class="badge-anchor">
+            <img id="badgePreview" src="https://img.shields.io/badge/build-passing-10b981?logo=github&amp;logoColor=ffffff" alt="Aperçu du badge GitHub" width="104" height="20" class="badge-image" />
+          </a>
+          <figcaption class="stage-caption">
+            <a id="previewLinkBadge" href="https://github.com" target="_blank" rel="noopener noreferrer" class="active-link-pill">
+              <svg width="12" height="12" fill="none" stroke="#818cf8" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              <span id="previewLinkText">Lien actif : https://github.com</span>
+            </a>
+            <span id="loadingIndicator" class="status-badge hidden" aria-live="polite">Mise à jour...</span>
+          </figcaption>
+        </figure>
+
+        <section class="action-grid" aria-label="Actions principales d'export">
+          <button type="button" id="copyMarkdownBtn" class="btn-primary">
+            <svg id="copyIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span id="copyBtnText">Copy Markdown</span>
+          </button>
+
+          <button type="button" id="downloadSvgBtn" class="btn-secondary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span id="downloadBtnText">Download SVG</span>
+          </button>
+        </section>
+
+        <section class="snippets-section" aria-label="Codes générés">
+          <article class="snippet-block">
+            <header class="snippet-header">
+              <h3 class="snippet-title">Code Markdown cliquable</h3>
+              <span id="copyToast" class="toast-msg" role="status" aria-live="polite">✓ Copié dans le presse-papiers !</span>
+            </header>
+            <pre class="code-pre"><code id="markdownOutput">[![build: passing](https://img.shields.io/badge/build-passing-10b981?logo=github&amp;logoColor=ffffff)](https://github.com)</code></pre>
+          </article>
+
+          <article class="snippet-block">
+            <header class="snippet-header">
+              <h3 class="snippet-title">Code HTML cliquable (<code>&lt;a href="..."&gt;</code>)</h3>
+              <button type="button" id="copyHtmlBtn" class="btn-text-copy">Copier le HTML</button>
+            </header>
+            <pre class="code-pre html-tone"><code id="htmlOutput">&lt;a href="https://github.com" target="_blank" rel="noopener noreferrer"&gt;&lt;img src="https://img.shields.io/badge/build-passing-10b981?logo=github&amp;logoColor=ffffff" alt="build: passing" width="104" height="20" /&gt;&lt;/a&gt;</code></pre>
+          </article>
+
+          <article class="snippet-block">
+            <header class="snippet-header">
+              <h3 class="snippet-title">URL Shields.io directe</h3>
+              <button type="button" id="copyUrlBtn" class="btn-text-copy">Copier l'URL</button>
+            </header>
+            <pre class="code-pre url-tone"><code id="urlOutput">https://img.shields.io/badge/build-passing-10b981?logo=github&amp;logoColor=ffffff</code></pre>
+          </article>
+        </section>
+      </article>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>Shields.io Studio | LiL PouLaY.</p>
+    <address>Semi Vibe-Coded • Formats supportés : SVG - MD - HTML</address>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
